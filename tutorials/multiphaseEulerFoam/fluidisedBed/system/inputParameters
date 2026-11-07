@@ -1,0 +1,17 @@
+// geometry parameters
+
+xmax  0.07;
+xmin  -0.07;
+ymax  1.0;
+ymin  0.0;
+//              for initial conditions
+yBedTop    0.25;
+
+
+//physical parameters
+
+
+
+// mesh parameters
+
+// tunable numerical settings

@@ -1,0 +1,35 @@
+#!/bin/sh
+
+cd ${0%/*} || exit 1    # Run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+runApplication blockMesh
+
+echo "Running checkMesh ..."
+checkMesh > log.checkMesh 2>&1
+
+if ! grep -q "Mesh OK" log.checkMesh
+then
+    echo ""
+    echo "ERROR: checkMesh failed"
+    echo "======================"
+    cat log.checkMesh
+    exit 1
+fi
+
+echo "Mesh OK"
+
+runApplication setFields
+
+# runApplication decomposePar
+# runParallel $(getApplication)
+# runApplication reconstructPar
+
+runApplication $(getApplication)
+
+../../../utils/plotContours.py --field alpha.particles --iso 0.05 --dir ./postProcessing/midXYPlane
+
+
+#------------------------------------------------------------------------------

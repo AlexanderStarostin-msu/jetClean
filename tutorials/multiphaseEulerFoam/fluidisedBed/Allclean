@@ -1,0 +1,11 @@
+#!/bin/sh
+
+#foamCleanCase
+
+rm -rf ./processor* 
+
+rm -rf ./postProcessing
+
+rm log.*
+
+#------------------------------------------------------------------------------
