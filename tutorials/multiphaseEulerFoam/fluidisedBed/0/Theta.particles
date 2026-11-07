@@ -21,28 +21,45 @@ referenceLevel      1e-4;
 
 boundaryField
 {
+    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
     inlet
     {
-        type            fixedValue;
-        value           uniform 1e-4;
+        type fixedValue; value uniform 1e-4;
     }
 
     outlet
     {
-        type            zeroGradient;
+        type zeroGradient;
     }
 
     walls
     {
-        type               JohnsonJacksonParticleTheta;
-        restitutionCoefficient 0.8;
-        specularityCoefficient 0.01;
-        value           uniform 1e-4;
+        type JohnsonJacksonParticleTheta; restitutionCoefficient 0.8; specularityCoefficient 0.01; value uniform 1e-4;
     }
 
     frontAndBackPlanes
     {
-        type            empty;
+        type empty;
+    }
+
+    annularSlit
+    {
+        type zeroGradient;
+    }
+
+    centerSlit
+    {
+        type zeroGradient;
+    }
+
+    tubungSlit
+    {
+        type zeroGradient;
+    }
+
+    tubingSlit
+    {
+        type zeroGradient;
     }
 }
 

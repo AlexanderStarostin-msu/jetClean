@@ -52,7 +52,7 @@ maxDeltaT       0.01;
 
 functions
 {
-    #includeFunc fieldAverage(U.particles, U.air, alpha.particles, p)
+//    #includeFunc fieldAverage(U.particles, U.air, alpha.particles, p)
 
     #include "midXYPlane"
 

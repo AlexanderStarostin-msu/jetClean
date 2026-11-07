@@ -19,28 +19,40 @@ internalField   uniform 0;
 
 boundaryField
 {
+    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
     inlet
     {
-        type            calculated;
-        value           $internalField;
+        type calculated; value $internalField;
     }
 
     outlet
     {
-        type            calculated;
-        value           $internalField;
+        type calculated; value $internalField;
     }
 
     walls
     {
-        type            compressible::alphatWallFunction;
-        Prt             0.85;
-        value           $internalField;
+        type compressible::alphatWallFunction; Prt 0.85; value $internalField;
     }
 
     defaultFaces
     {
-        type            empty;
+        type empty;
+    }
+
+    annularSlit
+    {
+        type calculated; value $internalField;
+    }
+
+    centerSlit
+    {
+        type calculated; value $internalField;
+    }
+
+    tubingSlit
+    {
+        type calculated; value $internalField;
     }
 }
 

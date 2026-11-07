@@ -19,28 +19,45 @@ internalField   uniform (0 0 0);
 
 boundaryField
 {
+    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
     inlet
     {
-        type            fixedValue;
-        value           uniform (0 0 0);
+        type fixedValue; value uniform (0 0 0);
     }
 
     outlet
     {
-        type            fixedValue;
-        value           uniform (0 0 0);
+        type fixedValue; value uniform (0 0 0);
     }
 
     walls
     {
-        type            JohnsonJacksonParticleSlip;
-        specularityCoefficient  0.01;
-        value           uniform (0 0 0);
+        type JohnsonJacksonParticleSlip; specularityCoefficient 0.01; value uniform (0 0 0);
     }
 
     frontAndBackPlanes
     {
-        type            empty;
+        type empty;
+    }
+
+    annularSlit
+    {
+        type fixedValue; value uniform (0 0 0);
+    }
+
+    centerSlit
+    {
+        type fixedValue; value uniform (0 0 0);
+    }
+
+    tubungSlit
+    {
+        type fixedValue; value uniform (0 0 0);
+    }
+
+    tubingSlit
+    {
+        type fixedValue; value uniform (0 0 0);
     }
 }
 

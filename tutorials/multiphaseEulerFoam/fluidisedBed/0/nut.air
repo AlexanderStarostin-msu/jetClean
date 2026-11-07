@@ -19,27 +19,45 @@ internalField       uniform 0;
 
 boundaryField
 {
+    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
     inlet
     {
-        type            calculated;
-        value           $internalField;
+        type calculated; value $internalField;
     }
 
     outlet
     {
-        type            calculated;
-        value           $internalField;
+        type calculated; value $internalField;
     }
 
     walls
     {
-        type            nutkWallFunction;
-        value           $internalField;
+        type nutkWallFunction; value $internalField;
     }
 
     frontAndBackPlanes
     {
-        type            empty;
+        type empty;
+    }
+
+    annularSlit
+    {
+        type calculated; value $internalField;
+    }
+
+    centerSlit
+    {
+        type calculated; value $internalField;
+    }
+
+    tubungSlit
+    {
+        type calculated; value $internalField;
+    }
+
+    tubingSlit
+    {
+        type calculated; value $internalField;
     }
 }
 

@@ -19,6 +19,21 @@ internalField       uniform 1e5;
 
 boundaryField
 {
+
+    centerSlit
+    {
+        type calculated; value $internalField;
+    }
+    tubingSlit
+    {
+        type calculated; value $internalField;
+    }
+    annularSlit
+    {
+        type calculated; value $internalField;
+    }
+
+    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
     inlet
     {
         type            calculated;
@@ -41,6 +56,7 @@ boundaryField
     {
         type            empty;
     }
+
 }
 
 // ************************************************************************* //
