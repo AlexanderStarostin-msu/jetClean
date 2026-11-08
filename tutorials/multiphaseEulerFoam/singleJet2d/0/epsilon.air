@@ -19,7 +19,7 @@ internalField       uniform 10;
 
 boundaryField
 {
-    // Updated by bndFromMap.py at 2026-11-08T17:31:48Z (UTC)
+    // Updated by bndFromMap.py at 2026-11-08T23:12:34Z (UTC)
     inlet
     {
         type fixedValue; value $internalField;
@@ -42,7 +42,7 @@ boundaryField
 
     annularSlit
     {
-        type fixedValue; value $internalField;
+        type zeroGradient;
     }
 
     centerSlit
@@ -52,7 +52,7 @@ boundaryField
 
     tubingSlit
     {
-        type zeroGradient;
+        type fixedValue; value $internalField;
     }
 }
 

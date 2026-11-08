@@ -19,7 +19,7 @@ internalField       uniform 1e5;
 
 boundaryField
 {
-    // Updated by bndFromMap.py at 2026-11-08T17:31:48Z (UTC)
+    // Updated by bndFromMap.py at 2026-11-08T23:12:34Z (UTC)
     centerSlit
     {
         type calculated; value $internalField;
