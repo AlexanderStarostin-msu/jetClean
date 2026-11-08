@@ -27,7 +27,7 @@ interpolationScheme cellPoint;
 
 setFormat       raw;
 
-fields (    alpha.particles    U.particles    U.air    p_rgh );
+fields (    alpha.particles    U.particles    U.air    p_rgh  k );
 
 sets
 (

@@ -19,7 +19,7 @@ internalField       uniform 600;
 
 boundaryField
 {
-    // Updated by bndFromMap.py at 2026-11-07T22:28:13Z (UTC)
+    // Updated by bndFromMap.py at 2026-11-08T17:31:48Z (UTC)
     inlet
     {
         type zeroGradient;

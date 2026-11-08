@@ -19,7 +19,7 @@ internalField       uniform 1e5;
 
 boundaryField
 {
-    // Updated by bndFromMap.py at 2026-11-07T22:28:13Z (UTC)
+    // Updated by bndFromMap.py at 2026-11-08T17:31:48Z (UTC)
     inlet
     {
         type fixedFluxPressure; value $internalField;
@@ -42,7 +42,7 @@ boundaryField
 
     annularSlit
     {
-        type prghPressure; p $internalField; value $internalField;
+        type fixedFluxPressure; value $internalField;
     }
 
     centerSlit
@@ -52,7 +52,7 @@ boundaryField
 
     tubingSlit
     {
-        type fixedFluxPressure; value $internalField;
+        type prghPressure; p $internalField; value $internalField;
     }
 }
 

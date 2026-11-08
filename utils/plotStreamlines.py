@@ -185,17 +185,8 @@ def main():
     ny = 30
     nz = 1
 
-    streamlines = sparse_streamlines(
-        mesh,
-        xmin,
-        xmax,
-        ymin,
-        ymax,
-        z_plane=(zmin + zmax)/2,
-        nx=nx,
-        ny=ny,
-        min_dist_fraction=0.001,
-    )
+    streamlines = sparse_streamlines( mesh, xmin, xmax, ymin, ymax, z_plane=(zmin + zmax)/2,
+        nx=nx,   ny=ny,   min_dist_fraction=0.01   )
 
     p = pv.Plotter(off_screen=True)
     p.view_xy()
@@ -206,13 +197,19 @@ def main():
         mesh,
         scalars=np.linalg.norm(vel, axis=1),
         cmap="viridis",
-        opacity=0.4
+        opacity=0.4,
+        show_scalar_bar=True,
+        scalar_bar_args={
+                "title": field_name,
+                "vertical": True,
+                "position_x": 0.88,
+                "position_y": 0.1,
+                "height": 0.8,
+                "width": 0.08,
+        }        
     )
 
-    p.add_mesh(
-        streamlines.tube(radius=0.002*(xmax-xmin)),
-        color="black"
-    )
+    p.add_mesh(  streamlines.tube(radius=0.002*(xmax-xmin)),  color="black"  )
 
     p.show_axes()
     #p.show()

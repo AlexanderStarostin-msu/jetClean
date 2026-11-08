@@ -30,7 +30,7 @@ inlet:
     p_rgh:               type fixedFluxPressure; value $internalField;
     alphat.air:          type calculated; value $internalField;
     alphat.particles:    type calculated; value $internalField;
-tubingSlit:
+annularSlit:
     T.air:               type fixedValue; value uniform 300;
     T.particles:         type zeroGradient;
     Theta.particles:     type fixedValue; value uniform 1e-4;
@@ -45,7 +45,7 @@ tubingSlit:
     p_rgh:               type fixedFluxPressure; value $internalField;
     alphat.air:          type calculated; value $internalField;
     alphat.particles:    type calculated; value $internalField;
-annularSlit:    
+tubingSlit:
     T.air:               type zeroGradient;
     T.particles:         type zeroGradient;
     Theta.particles:     type zeroGradient;

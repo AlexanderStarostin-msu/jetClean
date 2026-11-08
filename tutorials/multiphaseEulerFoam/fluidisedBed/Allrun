@@ -29,8 +29,15 @@ runApplication setFields
 
 runApplication $(getApplication)
 
+# case visualization
 ../../../utils/plotContours.py --field particles --iso 0.05 --dir ./postProcessing/midXYPlane
-
+../../../utils/plotStreamlines.py U.air
+../../../utils/plotStreamlines.py U.particles
 gnuplot -c cropResidualsTotal save
+gnuplot -c cropAlphaVol save
+
+#combine in the dashboard
+../../../utils/caseDash.py
+
 
 #------------------------------------------------------------------------------

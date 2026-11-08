@@ -102,7 +102,7 @@ relaxationFactors
 
     equations
     {
-        ".*"            1;
+        ".*"         1;
     }
 }
 

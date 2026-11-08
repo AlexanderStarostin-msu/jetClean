@@ -13,7 +13,7 @@ yBedTop    0.1;
 
 //physical parameters
 Ujet  10.0; // jet velocity
-gamma  20.0; // jet angle in degrees from vertical
+gamma  0.0; // jet angle in degrees from vertical
 
 
 // mesh parameters
