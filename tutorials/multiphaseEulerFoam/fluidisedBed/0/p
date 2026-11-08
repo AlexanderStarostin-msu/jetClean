@@ -19,7 +19,7 @@ internalField       uniform 1e5;
 
 boundaryField
 {
-
+    // Updated by bndFromMap.py at 2026-11-07T22:28:13Z (UTC)
     centerSlit
     {
         type calculated; value $internalField;
@@ -33,7 +33,6 @@ boundaryField
         type calculated; value $internalField;
     }
 
-    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
     inlet
     {
         type            calculated;
@@ -57,6 +56,11 @@ boundaryField
         type            empty;
     }
 
+
+    defaultFaces
+    {
+        type calculated; value $internalField;
+    }
 }
 
 // ************************************************************************* //

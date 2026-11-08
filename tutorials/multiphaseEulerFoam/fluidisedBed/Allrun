@@ -29,7 +29,8 @@ runApplication setFields
 
 runApplication $(getApplication)
 
-../../../utils/plotContours.py --field alpha.particles --iso 0.05 --dir ./postProcessing/midXYPlane
+../../../utils/plotContours.py --field particles --iso 0.05 --dir ./postProcessing/midXYPlane
 
+gnuplot -c cropResidualsTotal save
 
 #------------------------------------------------------------------------------

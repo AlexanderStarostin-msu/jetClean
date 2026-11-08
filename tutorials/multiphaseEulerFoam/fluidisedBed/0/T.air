@@ -19,7 +19,7 @@ internalField       uniform 600;
 
 boundaryField
 {
-    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
+    // Updated by bndFromMap.py at 2026-11-07T22:28:13Z (UTC)
     inlet
     {
         type fixedValue; value uniform 300;
@@ -42,22 +42,17 @@ boundaryField
 
     annularSlit
     {
-        type inletOutlet; phi phi.air; inletValue uniform 300; value uniform 300;
+        type zeroGradient;
     }
 
     centerSlit
     {
-        type inletOutlet; phi phi.air; inletValue uniform 300; value uniform 300;
-    }
-
-    tubungSlit
-    {
-        type inletOutlet; phi phi.air; inletValue uniform 300; value uniform 300;
+        type zeroGradient;
     }
 
     tubingSlit
     {
-        type inletOutlet; phi phi.air; inletValue uniform 300; value uniform 300;
+        type fixedValue; value uniform 300;
     }
 }
 

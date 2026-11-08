@@ -43,13 +43,13 @@ vertices
 blocks
 (
     // Block 1: Center region ($xmin to $x1)
-    hex (0 1 6 7 8 9 14 15) (10 200 1) simpleGrading (1 1 1)
+    hex (0 1 6 7 8 9 14 15) (10 80 1) simpleGrading (1 1 1)
 
     // Block 2: Tubing region ($x1 to $x2)
-    hex (1 2 5 6 9 10 13 14) (10 200 1) simpleGrading (1 1 1)
+    hex (1 2 5 6 9 10 13 14) (10 80 1) simpleGrading (1 1 1)
 
     // Block 3: Annular region ($x2 to $xmax)
-    hex (2 3 4 5 10 11 12 13) (10 200 1) simpleGrading (1 1 1)
+    hex (2 3 4 5 10 11 12 13) (10 80 1) simpleGrading (1 1 1)
 );
 
 boundary
@@ -67,7 +67,6 @@ boundary
         type wall; // No flow region at y = ymax
         faces
         (
-            (7 14 15 6) // Top face of Block 1 (at y = ymax)
         );
     }
 
@@ -102,6 +101,8 @@ boundary
             (1 10 9 2)  // Y-min face of Block 2
             (2 11 10 3) // Y-min face of Block 3
 
+           //from centerSlit
+            (7 14 15 6) // Top face of Block 1 (at y = ymax)
         );
     }
 

@@ -19,7 +19,7 @@ internalField       uniform 600;
 
 boundaryField
 {
-    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
+    // Updated by bndFromMap.py at 2026-11-07T22:28:13Z (UTC)
     inlet
     {
         type zeroGradient;
@@ -46,11 +46,6 @@ boundaryField
     }
 
     centerSlit
-    {
-        type zeroGradient;
-    }
-
-    tubungSlit
     {
         type zeroGradient;
     }

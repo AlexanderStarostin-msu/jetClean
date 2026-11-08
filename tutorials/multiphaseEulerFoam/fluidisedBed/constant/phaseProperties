@@ -89,6 +89,12 @@ wallLubrication
 {}
 
 turbulentDispersion
-{}
+{
+    particles_dispersedIn_air
+    { 
+        type Burns;
+        sigma  0.6;
+    }
+}
 
 // ************************************************************************* //

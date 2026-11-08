@@ -13,13 +13,15 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+#include "./system/inputParameters"
+
 dimensions      [0 1 -1 0 0 0 0];
 
-internalField   uniform (0 0.25 0);
+internalField   uniform (0 0 0);
 
 boundaryField
 {
-    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
+    // Updated by bndFromMap.py at 2026-11-07T22:28:13Z (UTC)
     inlet
     {
         type interstitialInletVelocity; inletVelocity uniform (0 0.25 0); alpha alpha.air; value $internalField;
@@ -47,17 +49,12 @@ boundaryField
 
     centerSlit
     {
-        type pressureInletOutletVelocity; phi phi.air; value $internalField;
-    }
-
-    tubungSlit
-    {
-        type pressureInletOutletVelocity; phi phi.air; value $internalField;
+        type noSlip;
     }
 
     tubingSlit
     {
-        type pressureInletOutletVelocity; phi phi.air; value $internalField;
+        type interstitialInletVelocity; inletVelocity uniform ($Ujetx $Ujety 0); alpha alpha.air; value $internalField;
     }
 }
 

@@ -34,10 +34,10 @@ tubingSlit:
     T.air:               type fixedValue; value uniform 300;
     T.particles:         type zeroGradient;
     Theta.particles:     type fixedValue; value uniform 1e-4;
-    U.air:               type interstitialInletVelocity; inletVelocity uniform (0 -0.25 0); alpha alpha.air; value $internalField;
+    U.air:               type interstitialInletVelocity; inletVelocity uniform ($Ujetx $Ujety 0); alpha alpha.air; value $internalField;
     U.particles:         type fixedValue; value uniform (0 0 0);
-    alpha.air:           type zeroGradient;
-    alpha.particles:     type zeroGradient;
+    alpha.air:           type fixedValue; value uniform 1.0;
+    alpha.particles:     type fixedValue; value uniform 0.0;
     epsilon.air:         type fixedValue; value $internalField;
     k.air:               type fixedValue; value $internalField;
     nut.air:             type calculated; value $internalField;
@@ -46,26 +46,26 @@ tubingSlit:
     alphat.air:          type calculated; value $internalField;
     alphat.particles:    type calculated; value $internalField;
 annularSlit:    
-    T.air:               type inletOutlet; phi phi.air; inletValue uniform 300; value uniform 300;
+    T.air:               type zeroGradient;
     T.particles:         type zeroGradient;
     Theta.particles:     type zeroGradient;
     U.air:               type pressureInletOutletVelocity; phi phi.air; value $internalField;
-    U.particles:         type fixedValue; value uniform (0 0 0);
+    U.particles:         type pressureInletOutletVelocity; phi phi.particles; value $internalField;
     alpha.air:           type zeroGradient;
     alpha.particles:     type zeroGradient;
-    epsilon.air:         type inletOutlet; phi phi.air; inletValue $internalField; value $internalField;
-    k.air:               type inletOutlet; phi phi.air; inletValue $internalField; value $internalField;
+    epsilon.air:         type zeroGradient;
+    k.air:               type zeroGradient;
     nut.air:             type calculated; value $internalField;
     nut.particles:       type calculated; value $internalField;
     p_rgh:               type prghPressure; p $internalField; value $internalField;
     alphat.air:          type calculated; value $internalField;
-    alphat.particles:    type calculated; value $internalField;
+    alphat.particles:    type zeroGradient;
 centerSlit, walls:
     T.air:               type zeroGradient;
     T.particles:         type zeroGradient;
     Theta.particles:     type JohnsonJacksonParticleTheta; restitutionCoefficient 0.8; specularityCoefficient 0.01; value uniform 1e-4;
     U.air:               type noSlip;
-    U.particles:         type noSlip;
+    U.particles:         type slip;
     alpha.air:           type zeroGradient;
     alpha.particles:     type zeroGradient;
     epsilon.air:         type epsilonWallFunction; value $internalField;

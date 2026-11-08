@@ -9,7 +9,7 @@ midXYPlane
 
     surfaceFormat   vtk;
 
-    fields (  alpha.particles  U.particles  U.air  p   );
+    fields (  alpha.particles  alpha.air   U.particles  U.air  p   );
 
     surfaces
     (

@@ -19,7 +19,7 @@ internalField   uniform 0;
 
 boundaryField
 {
-    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
+    // Updated by bndFromMap.py at 2026-11-07T22:28:13Z (UTC)
     inlet
     {
         type calculated; value $internalField;
@@ -47,7 +47,7 @@ boundaryField
 
     centerSlit
     {
-        type calculated; value $internalField;
+        type compressible::alphatWallFunction; Prt 0.85; value $internalField;
     }
 
     tubingSlit

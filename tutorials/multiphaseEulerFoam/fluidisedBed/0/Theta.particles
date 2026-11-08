@@ -21,7 +21,7 @@ referenceLevel      1e-4;
 
 boundaryField
 {
-    // Updated by bndFromMap.py at 2026-11-07T18:15:33Z (UTC)
+    // Updated by bndFromMap.py at 2026-11-07T22:28:13Z (UTC)
     inlet
     {
         type fixedValue; value uniform 1e-4;
@@ -49,17 +49,12 @@ boundaryField
 
     centerSlit
     {
-        type zeroGradient;
-    }
-
-    tubungSlit
-    {
-        type zeroGradient;
+        type JohnsonJacksonParticleTheta; restitutionCoefficient 0.8; specularityCoefficient 0.01; value uniform 1e-4;
     }
 
     tubingSlit
     {
-        type zeroGradient;
+        type fixedValue; value uniform 1e-4;
     }
 }
 
