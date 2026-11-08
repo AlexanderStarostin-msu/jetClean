@@ -8,8 +8,8 @@ if ( ARG1 eq "save") {
 
 set grid
 set title system("echo  ${PWD##*/}: Residuals")
-set ylabel "Solids volume m3"
-set xlabel "Iteration"
+set ylabel "Solids volume [m3]"
+set xlabel "Time [s]"
 #set yrange [1e-9:1];
 
 solver="multiphaseEulerFoam"
@@ -17,13 +17,10 @@ solver="multiphaseEulerFoam"
 labelTime = system( "tail -1000 log.".solver." | grep '^Time = ' | tail -1" )
 set label 1 "".labelTime at 0,1.5 
 
-labelCo = system( "tail -1000 log.".solver." | grep '^Courant Number mean: ' | tail -1")
-set label 2 "".labelCo at 0,1.5-1 
-
 #  volIntegrate() of alpha.particles = 0.000101716
 
-cropFile=" cat log.".solver
-plot "< ".cropFile." | grep 'volIntegrate() of alpha.particles' | tr -s ' ' | cut -d' ' -f6 | tr -d ','" title "solidsVolume" with lines,\
+dataCmd = "grep -E '^Time = |volIntegrate\\(\\) of alpha.particles' log.".solver." | awk 'BEGIN{t=0} /^Time = /{t=$3} /volIntegrate/{print t,$NF}'"
+plot "< ".dataCmd using 1:2 with lines title "solidsVolume"
 
 if ( ARG1 eq "save") {
   exit
