@@ -2,13 +2,37 @@
 
 import sys
 import glob
+import os
+import shutil
 from pathlib import Path
+
+
+def _ensure_headless_display():
+    if os.environ.get("DISPLAY"):
+        return
+
+    xvfb_run = shutil.which("xvfb-run")
+    if xvfb_run is None:
+        raise SystemExit(
+            "No graphical display is available and 'xvfb-run' is not installed. "
+            "Install Xvfb (and xauth), or run this script with "
+            "'xvfb-run -a env LIBGL_ALWAYS_SOFTWARE=1'."
+        )
+
+    os.environ.setdefault("LIBGL_ALWAYS_SOFTWARE", "1")
+    os.execvp(
+        xvfb_run,
+        [xvfb_run, "-a", sys.executable, os.path.abspath(__file__), *sys.argv[1:]],
+    )
+
+
+if __name__ == "__main__":
+    _ensure_headless_display()
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-import os
-os.environ["PYVISTA_OFF_SCREEN"] = "true"
+os.environ.setdefault("PYVISTA_OFF_SCREEN", "true")
 import pyvista as pv
 
 import vtk

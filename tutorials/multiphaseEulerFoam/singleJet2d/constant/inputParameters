@@ -12,7 +12,7 @@ yBedTop    0.1;
 
 
 //physical parameters
-Ujet  10.0; // jet velocity
+Ujet   2.0; // jet velocity
 gamma  0.0; // jet angle in degrees from vertical
 
 
