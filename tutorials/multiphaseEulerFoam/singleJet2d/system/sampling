@@ -16,7 +16,7 @@ FoamFile
 
 sampling{
 
-#include "./system/inputParameters"
+#include "./constant/inputParameters"
 
 type            sets;
 libs            ("libsampling.so");

@@ -13,7 +13,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#include "./system/inputParameters"
+#include "./constant/inputParameters"
 
 convertToMeters 1;
 

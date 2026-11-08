@@ -14,7 +14,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-#include "./system/inputParameters"
+#include "./constant/inputParameters"
 
 defaultFieldValues
 (
