@@ -1,0 +1,31 @@
+// geometry parameters
+
+xmin  0.0;
+x1    0.05;
+x2    0.07;
+xmax  0.10; // half of 8 inch
+
+ymin  0.0;
+ymax  0.3;
+//              for initial conditions
+yBedTop    0.1;
+
+
+//physical parameters
+Ujet   2.0; // jet velocity
+gamma  0.0; // jet angle in degrees from vertical
+
+
+// mesh parameters
+
+// tunable numerical settings
+ySmpl1  0.25;
+yBedTopSmpl1  #calc "$yBedTop - 0.02";
+
+// derived parameters
+
+pi   3.14159265358979323846;
+//cosGamma  #calc "cos($gamma*$pi/180.0)";
+//sinGamma  #calc "sin($gamma*$pi/180.0)";
+Ujetx  #calc "(-$Ujet) * sin($gamma*($pi)/180.0)";
+Ujety  #calc "(-$Ujet) * cos($gamma*($pi)/180.0)";
