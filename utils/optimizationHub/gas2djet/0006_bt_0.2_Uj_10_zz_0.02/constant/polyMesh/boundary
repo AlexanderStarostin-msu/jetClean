@@ -20,40 +20,40 @@ FoamFile
     {
         type            patch;
         nFaces          0;
-        startFace       4690;
+        startFace       3510;
     }
     centerSlit
     {
         type            wall;
         inGroups        List<word> 1(wall);
         nFaces          0;
-        startFace       4690;
+        startFace       3510;
     }
     tubingSlit
     {
         type            patch;
         nFaces          4;
-        startFace       4690;
+        startFace       3510;
     }
     annularSlit
     {
         type            patch;
         nFaces          10;
-        startFace       4694;
+        startFace       3514;
     }
     walls
     {
         type            wall;
         inGroups        List<word> 1(wall);
-        nFaces          206;
-        startFace       4704;
+        nFaces          166;
+        startFace       3524;
     }
     frontAndBackPlanes
     {
         type            empty;
         inGroups        List<word> 1(empty);
-        nFaces          4800;
-        startFace       4910;
+        nFaces          3600;
+        startFace       3690;
     }
 )
 

@@ -1,0 +1,30 @@
+midXYPlane
+{
+    type            surfaces;
+    libs            ("libsampling.so");
+
+    writeControl    writeTime;
+
+    interpolationScheme cellPoint;
+
+    surfaceFormat   vtk;
+
+    fields (  alpha.particles  alpha.air   U.particles  U.air  p   );
+
+    surfaces
+    (
+        midXZ
+        {
+            type            cuttingPlane;
+            planeType       pointAndNormal;
+
+            pointAndNormalDict
+            {
+                point   (0.0 0.0 0.0);
+                normal  (0 0 1);
+            }
+
+            interpolate true;
+        }
+    );
+}

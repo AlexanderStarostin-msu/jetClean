@@ -1,0 +1,140 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  10
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include "./constant/inputParameters"
+
+convertToMeters 1;
+
+// xmin ------ x1 ------ x2 ------ x3 ------ xmax
+//      center     tubing    separator   annular
+
+vertices
+(
+    // Front plane (z = -0.01)
+
+    ($xmin $ymin -0.01) // 0
+    ($x1   $ymin -0.01) // 1
+    ($x2   $ymin -0.01) // 2
+    ($x3   $ymin -0.01) // 3
+    ($xmax $ymin -0.01) // 4
+
+    ($xmax $ymax -0.01) // 5
+    ($x3   $ymax -0.01) // 6
+    ($x2   $ymax -0.01) // 7
+    ($x1   $ymax -0.01) // 8
+    ($xmin $ymax -0.01) // 9
+
+    // Back plane (z = 0.01)
+
+    ($xmin $ymin 0.01) // 10
+    ($x1   $ymin 0.01) // 11
+    ($x2   $ymin 0.01) // 12
+    ($x3   $ymin 0.01) // 13
+    ($xmax $ymin 0.01) // 14
+
+    ($xmax $ymax 0.01) // 15
+    ($x3   $ymax 0.01) // 16
+    ($x2   $ymax 0.01) // 17
+    ($x1   $ymax 0.01) // 18
+    ($xmin $ymax 0.01) // 19
+);
+
+blocks
+(
+    // Center region
+    hex (0 1 8 9 10 11 18 19)        (10 80 1)        simpleGrading (1 1 1)
+
+    // Tubing region
+    hex (1 2 7 8 11 12 17 18)        (4 80 1)        simpleGrading (1 1 1)
+
+    // Separator region
+    hex (2 3 6 7 12 13 16 17)        (10 80 1)        simpleGrading (1 1 1)
+
+    // Annular region
+    hex (3 4 5 6 13 14 15 16)        (10 80 1)        simpleGrading (1 1 1)
+);
+
+boundary
+(
+    centerSlit
+    {
+        type wall; // No flow region at y = ymax
+        faces
+        (
+        );
+    }
+
+    tubingSlit
+    {
+        type patch;
+        faces
+        (
+            (7 17 18 8)
+        );
+    }
+
+    annularSlit
+    {
+        type patch;
+        faces
+        (
+            (5 15 16 6)
+        );
+    }
+
+    walls
+    {
+        type wall;
+        faces
+        (
+            // left outer wall
+            (0 9 19 10)
+
+            // right outer wall
+            (4 14 15 5)
+
+            // bottom faces
+            (0 1 11 10)
+            (1 2 12 11)
+            (2 3 13 12)
+            (3 4 14 13)
+
+            // top face of center block
+            (9 8 18 19)
+
+            // top face of separator block
+            (7 6 16 17)
+        );
+    }
+    frontAndBackPlanes
+    {
+        type empty;
+
+        faces
+        (
+            // Front plane
+            (0 1 8 9)
+            (1 2 7 8)
+            (2 3 6 7)
+            (3 4 5 6)
+
+            // Back plane
+            (10 19 18 11)
+            (11 18 17 12)
+            (12 17 16 13)
+            (13 16 15 14)
+        );
+    }
+);

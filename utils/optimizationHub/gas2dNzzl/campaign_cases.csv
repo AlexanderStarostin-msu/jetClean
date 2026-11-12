@@ -1,0 +1,7 @@
+case,solver,Ujet,dNoz,endTime,offsetNoz
+1,multiphaseEulerFoam,10,0.02,1.0,0.05
+2,multiphaseEulerFoam,20,0.02,1.0,0.05
+3,multiphaseEulerFoam,10,0.02,1.0,0.075
+4,multiphaseEulerFoam,20,0.02,1.0,0.075
+5,multiphaseEulerFoam,10,0.02,1.0,0.1
+6,multiphaseEulerFoam,20,0.02,1.0,0.1

@@ -23,12 +23,17 @@
 #
 #2. Supported Extraction Modes
 #
-#   2.1 LastInColumn
+#   2.1 FirstInColumn
+#       - Read the file as a table.
+#       - Determine the column index from the last header line starting with '#'.
+#       - Extract the first numeric value in that column after the header.
+#
+#   2.2 LastInColumn
 #       - Read the file as a table.
 #       - Determine the column index from the last header line starting with '#'.
 #       - Extract the last numeric value in that column.
 #
-#   2.2 FromLastString
+#   2.3 FromLastString
 #       - Scan the file from bottom to top.
 #       - Search for the keyword (including quoted variants).
 #       - Extract the first number appearing *after* the keyword.
@@ -43,11 +48,11 @@
 #               use that file instead.
 #           * This replacement must occur BEFORE checking file existence.
 #
-#   2.3 AfterKeyword
+#   2.4 AfterKeyword
 #       - Scan file top-to-bottom.
 #       - When the keyword is found, extract the number immediately after it.
 #
-#   2.4 WordAfterKeyword
+#   2.5 WordAfterKeyword
 #       - Scan file top-to-bottom.
 #       - Extract the next word after the keyword.
 #       - If numeric → convert to float.
@@ -78,7 +83,7 @@ import os
 import shlex
 from pathlib import Path
 
-from summaryCrossplot import generate_crossplot_from_csv
+#from summaryCrossplot import generate_crossplot_from_csv
 
 def format_collected_value(value, decimals: int = 4, enabled: bool = True):
     """Format numeric values with fixed significant digits when enabled."""
@@ -153,7 +158,7 @@ def find_number_by_keyword(config: dict, casePath):
             - 'token': identifier for this config
             - 'path': path to the file
             - 'keyword': keyword to search for
-            - 'mode': one of ['LastInColumn', 'FromLastString', 'AfterKeyword']
+            - 'mode': one of [ 'FirstInColumn','LastInColumn', 'FromLastString', 'AfterKeyword', 'WordAfterKeyword']
             - 'default': default value if number not found
     
     Returns:
@@ -175,8 +180,44 @@ def find_number_by_keyword(config: dict, casePath):
     path = resolve_foam_solver_path(path)
     if not os.path.isfile(path):
         return (token, result)
-    
-    if mode == "LastInColumn":
+
+    if mode == "FirstInColumn":
+        try:
+            with open(path, "r", encoding="utf-8", errors="ignore") as f:
+                lines = f.readlines()
+        except Exception as e:
+            raise IOError(f"Error reading file: {e}")
+
+        header = lines[0].strip().split()
+        header_line_idx = 0
+
+        for i, line in enumerate(lines):
+            if line.strip().startswith("#"):
+                header = line.strip()[1:].strip().split()
+                header_line_idx = i
+
+        if keyword in header:
+            col_index = header.index(keyword)
+
+            for line in lines[header_line_idx + 1:]:
+                if not line.strip():
+                    continue
+
+                if line.strip().startswith("#"):
+                    continue
+
+                parts = line.strip().split()
+
+                if len(parts) <= col_index:
+                    continue
+
+                try:
+                    result = float(parts[col_index])
+                    break
+                except ValueError:
+                    continue
+
+    elif mode == "LastInColumn":
         try:
             with open(path, "r", encoding="utf-8", errors="ignore") as f:
                 lines = f.readlines()
@@ -351,12 +392,12 @@ if __name__ == "__main__":
     from datetime import datetime
 
     # argv[1]: mandatory cases folder
-    # argv[2]: optional config file (default: collectMCR.cfg)
+    # argv[2]: optional config file (default: cfd_clect.cfg)
     if len(sys.argv) < 2:
         raise SystemExit("Usage: collectMCR.py <cases_folder> [config_file]")
 
     cases_root = sys.argv[1]
-    config_file = sys.argv[2] if len(sys.argv) > 2 else "collectMCR.cfg"
+    config_file = sys.argv[2] if len(sys.argv) > 2 else "cfd_collect.cfg"
     config_file = resolve_script_local_path(config_file)
 
     if not os.path.isdir(cases_root):
@@ -449,7 +490,7 @@ if __name__ == "__main__":
     print(f"Results saved to: {csv_path}")
 
     try:
-        plot_path = generate_crossplot_from_csv(Path(csv_path))
+    #    plot_path = generate_crossplot_from_csv(Path(csv_path))
         print(f"Crossplot saved to: {plot_path}")
     except Exception as exc:
         print(f"Warning: crossplot generation skipped: {exc}")

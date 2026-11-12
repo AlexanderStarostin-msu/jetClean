@@ -1,0 +1,31 @@
+{
+  "campaign": {
+    "solvers": [
+      {
+        "solver": "multiphaseEulerFoam",
+        "template": "tmpl_gas2dNzzl"
+      }
+    ],
+
+    "parameters": [
+      {
+        "name": "endTime",
+        "values": [ 1.0 ]
+      },
+      {
+        "name": "offsetNoz",
+        "values": [0.025, 0.05, 0.075, 0.1],
+        "addPostfix":"oNoz"
+      },
+      {
+        "name": "Ujet",
+        "values": [10, 20],
+        "addPostfix":"Uj"
+      },
+      {
+        "name": "dNoz",
+        "values": [0.02]
+      }
+    ]
+  }
+}
