@@ -1,0 +1,31 @@
+#use with the command in the OF case folder:
+#    gnuplot -c cropResidualsTotal save
+
+if ( ARG1 eq "save") {
+  set term png             
+  set output "solidsVolTotal.png" 
+}
+
+set grid
+set title system("echo  ${PWD##*/}: Residuals")
+set ylabel "Solids volume"
+set xlabel "Time [s]"
+#set yrange [1e-9:1];
+
+solver="multiphaseEulerFoam"
+
+labelTime = system( "tail -1000 log.".solver." | grep '^Time = ' | tail -1" )
+set label 1 "".labelTime at 0,1.5 
+
+#  volIntegrate() of alpha.particles = 0.000101716
+
+dataCmd = "grep -h -E '^Time = |volIntegrate\\(\\) of alpha.particles' log.* | awk 'BEGIN{t=0; init=0} /^Time = /{t=$3} /volIntegrate/{if (init==0) init=$NF; print t, $NF/init}'"
+plot "< ".dataCmd using 1:2 with lines title "solidsVolume (scaled)"
+
+if ( ARG1 eq "save") {
+  exit
+}
+
+pause 1
+
+reread

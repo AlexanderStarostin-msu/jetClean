@@ -1,0 +1,39 @@
+// geometry parameters
+
+xmin  0.0;
+
+Di    0.11; //BHA size
+// As a rule of thumb:
+// Small drilling rig (300-500 L/min mud flow): ~10-12 mm nozzles.
+// Medium rig (500-800 L/min): ~12-14 mm nozzles.
+// Large rig (>800 L/min): ~14-18 mm nozzles.
+// For comparison, a 12 mm nozzle area is about 113 mm².
+dNoz  0.01;
+xmax  0.15; // 30 cm borehole
+
+ymin  0.0;
+ymax  0.6;  // 50 cm from borehole to top of domain + 10 cm of bed thickness
+//              for initial conditions
+yBedTop  0.2; // bed thickness might vary to model offset from the borehole
+
+
+//physical parameters
+Ujet   10; // jet velocity
+gamma  0.0; // jet angle in degrees from vertical // nozzles directed downward
+
+
+// mesh parameters
+
+// tunable numerical settings
+ySmpl1  0.25;
+yBedTopSmpl1  #calc "$yBedTop - 0.02";
+
+// derived parameters
+
+pi   3.14159265358979323846;
+Ujetx  #calc "(-$Ujet) * sin($gamma*($pi)/180.0)";
+Ujety  #calc "(-$Ujet) * cos($gamma*($pi)/180.0)";
+
+//geometrical scaling
+x2    #calc "$xmax - ($xmax-$Di)*($xmax-$Di)/$xmax";
+x1    #calc "$x2 - 5.0*($dNoz)*($dNoz)/$xmax";

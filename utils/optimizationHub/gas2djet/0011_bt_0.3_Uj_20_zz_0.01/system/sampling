@@ -1,0 +1,74 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  10
+     \\/     M manipulation |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      sample;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+sampling{
+
+#include "./constant/inputParameters"
+
+type            sets;
+libs            ("libsampling.so");
+
+writeControl    writeTime;
+
+interpolationScheme cellPoint;
+
+setFormat       raw;
+
+fields (    alpha.particles    U.particles    U.air    p_rgh   k.air );
+
+sets
+(
+    lineTop
+    {
+        type            lineUniform;
+        axis            x;              // Options: x, y, z, xyz, distance
+        start           ($xmin $ymax 0.0);
+        end             ($xmax $ymax 0.0);
+        nPoints         20;            // Number of sampling resolution points along the line
+    }
+
+    lineX
+    {
+        type            lineUniform;
+        axis            x;              // Options: x, y, z, xyz, distance
+        start           ($xmin $ySmpl1 0.0);
+        end             ($xmax $ySmpl1 0.0);
+        nPoints         20;            // Number of sampling resolution points along the line
+    }
+
+    lineTopBed
+    {
+        type            lineUniform;
+        axis            x;              // Options: x, y, z, xyz, distance
+        start           ($xmin $yBedTopSmpl1 0.0);
+        end             ($xmax $yBedTopSmpl1 0.0);
+        nPoints         20;            // Number of sampling resolution points along the line
+    }
+
+    lineBottom
+    {
+        type            lineUniform;
+        axis            x;              // Options: x, y, z, xyz, distance
+        start           ($xmin 0.0 0.0);
+        end             ($xmax 0.0 0.0);
+        nPoints         20;            // Number of sampling resolution points along the line
+    }
+
+);
+
+}
+
+// ************************************************** //
